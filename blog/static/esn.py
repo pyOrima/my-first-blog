@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-from browser import document
 import numpy as np
 import random, math
 import webbrowser, requests, bs4, sys
@@ -155,6 +151,3 @@ def predict():
     rslt = document["result"]
     rslt.text = pre
     #print(best/T*100, '%')
-
-execute_btn = document["execute"]
-execute_btn.bind("click", predict)
