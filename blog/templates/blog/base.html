@@ -6,21 +6,77 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <meta charset="utf-8">
+        <script src="static/brython.js"></script>
+        <script src="static/brython_stdlib.js"></script>   
     </head>
-    <body>
+    <body onload="brython()">
+        <!--<script type="text/python" src="static/esn.py"></script>-->
         <div class="page-header">
-            {% if user.is_authenticated %}
+            <!--{% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            {% endif %}
+            {% endif %}-->
             <h1><a href="/">来週のサザエさんのじゃんけんの手を予測しよう！</a></h1>
         </div>
-        <div class="content container">
+        <!--<div class="content container">
             <div class="row">
                 <div class="col-md-8">
                 {% block content %}
                 {% endblock %}
                 </div>
             </div>
+        </div>-->
+        <div align="center" class="container">
+            <form action="" method="">
+            <label for="sample">サンプルデータ：</label>
+            <button id="execute">サザエさんのじゃんけん予想</button><br>
+            <label>グー：１　チョキ：２　パー：３</label><br>
+            <label for="original">オリジナル：</label>
+            <label for="pattern" id="pattern">パターン数</label>
+            <input type="text" name="pattern" value="3">
+            <label for="trial">データ数</label>
+            <input type="text" name="trial" value="10">
+            <input type="submit" value="設定"></button>
+            </form>
+        </div>
+        <div align="right" class="container">
+            <button style="background-color: palegoldenrod;"><font size="5">予想</font></button>
+        </div>
+        <br>
+        <div align="right" class="container">
+            <table border="2">
+                <thead>
+                    <tr>
+                        <font size="5">次の値</font>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><font size="10"><div id="result"></div></font></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="container" align="center">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>データ番号</td>
+                        <script language="JavaScript">
+                            for (i=1; i<10; i++) document.write('<td>パターン',i,'</td>');
+                        </script>
+                    </tr>
+                </thead>
+                <tbody>
+                    <script language="JavaScript">
+                        for (i=1; i<10; i++) {
+                            document.write("<tr><td>",i,"</td>");
+                            for (j=1; j<10; j++) document.write('<td><label><input type="checkbox" name="q1" value="d',j,'"></label></td>');
+                            document.write("</tr>");
+                        }
+                    </script>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
