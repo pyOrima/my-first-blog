@@ -11,7 +11,7 @@
         <script src="static/brython_stdlib.js"></script>
         <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>-->
     </head>
-    <body onload="brython()">
+    <body onload="brython(1)">
         <div class="page-header">
             <!--{% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
@@ -36,7 +36,6 @@
 
         <script type="text/python">
             from browser import document
-            from browser import timer
             def func(event):
                 document["result"].text = "Hello"
             document["execute"].bind("click", func)
