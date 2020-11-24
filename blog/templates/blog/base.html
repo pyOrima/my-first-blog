@@ -27,17 +27,15 @@
             </div>
         </div>-->
         <div align="center" class="container">
-            <form action="" method="">
-            <label for="sample">サンプルデータ：</label>
+            <label>サンプルデータ：</label>
             <button id="execute">サザエさんのじゃんけん予想</button><br>
             <label>グー：１　チョキ：２　パー：３</label><br>
-            <label for="original">オリジナル：</label>
-            <label for="pattern" id="pattern">パターン数</label>
-            <input type="text" name="pattern" value="3">
-            <label for="trial">データ数</label>
-            <input type="text" name="trial" value="10">
-            <input type="submit" value="設定"></button>
-            </form>
+            <label>オリジナル：</label>
+            <label>パターン数</label>
+            <input type="text" name="pattern" value="3" id="pattern">
+            <label>データ数</label>
+            <input type="text" name="trial" value="10" id="trial">
+            <button type="button" id="set-button">設定</button>
         </div>
         <div align="right" class="container">
             <button style="background-color: palegoldenrod;"><font size="5">予想</font></button>
@@ -57,26 +55,58 @@
                 </tfoot>
             </table>
         </div>
-        <div class="container" align="center">
+        <script>pend=3+1;dend=10+1;</script>
+        <div class="container" align="center" id="original-data">
             <table border="1">
                 <thead>
                     <tr>
                         <td>データ番号</td>
                         <script language="JavaScript">
-                            for (i=1; i<10; i++) document.write('<td>パターン',i,'</td>');
+                            for (i=1; i<pend; i++) document.write('<td>パターン',i,'</td>');
                         </script>
                     </tr>
                 </thead>
                 <tbody>
                     <script language="JavaScript">
-                        for (i=1; i<10; i++) {
+                        for (i=1; i<dend; i++) {
                             document.write("<tr><td>",i,"</td>");
-                            for (j=1; j<10; j++) document.write('<td><label><input type="checkbox" name="q1" value="d',j,'"></label></td>');
+                            for (j=1; j<pend; j++) document.write('<td><label><input type="checkbox" name="q1" value="d',j,'"></label></td>');
                             document.write("</tr>");
                         }
                     </script>
                 </tbody>
             </table>
         </div>
+        <script>
+            document.getElementById("set-button").onclick = function(){
+                pend = document.getElementById("pattern").value + 1;
+                dend = document.getElementById("trial").value + 1;
+                tmp_doc1 = '';
+                for (i=1; i<pend/10; i++) {tmp_doc1 = tmp_doc1 + '<td>パターン' + i + '</td>';}
+                tmp_doc2 = '';
+                for (i=1; i<dend/10; i++) {
+                    tmp_doc2 = tmp_doc2 + '<tr><td>' + i + '</td>';
+                    tmp_doc = '';
+                    for (j=1; j<pend/10; j++) {
+                        tmp_doc = tmp_doc + '<td><label><input type="checkbox" name="q"' + i +' vales="d"'+ j + '></label></td>';
+                    }
+                    tmp_doc2 = tmp_doc2 + tmp_doc + '</tr>';
+                }
+                document.getElementById("original-data").innerHTML = 
+                '<div class="container" align="center" >'+
+                '<table border="1">'+
+                '<thead>'+
+                    '<tr>'+
+                        '<td>データ番号</td>'+
+                        tmp_doc1 + 
+                    '</tr>'+
+                '</thead>'+
+                '<tbody>'+
+                    tmp_doc2 +
+                '</tbody>'+
+                '</table>'+
+                '</div>';
+            }
+        </script>
     </body>
 </html>
