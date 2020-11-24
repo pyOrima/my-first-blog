@@ -37,7 +37,11 @@
         <!--<script type="text/python" src="static/bmi.py"></script>-->
         <script type="text/python">
             from browser import document
-            document <= "Hello"
+            def func(event):
+                w = float(document["weight"].value)
+                h = float(document["height"].value)
+                document["result"].text = str(w/h/h)
+            document["execute"].bind("click", func)
         </script>
 
         <div align="center" class="container">
