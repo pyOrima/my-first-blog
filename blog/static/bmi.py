@@ -1,5 +1,4 @@
 from browser import document
-import random, math
 def func(event):
     w = float(document["weight"].value)
     h = float(document["height"].value)
