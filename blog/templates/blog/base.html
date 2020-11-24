@@ -36,6 +36,7 @@
 
         <script type="text/python">
             from browser import document
+            from browser import timer
             def func(event):
                 document["result"].text = "Hello"
             document["execute"].bind("click", func)
