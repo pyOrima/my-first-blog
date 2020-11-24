@@ -7,11 +7,11 @@
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
         <meta charset="utf-8">
-        <script src="static/brython.js"></script>
-        <script src="static/brython_stdlib.js"></script>
-        <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>-->
+        <!--<script src="static/brython.js"></script>
+        <script src="static/brython_stdlib.js"></script>-->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
     </head>
-    <body onload="brython(1)">
+    <body onload="brython()">
         <div class="page-header">
             <!--{% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
