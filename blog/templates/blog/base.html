@@ -7,9 +7,9 @@
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
         <meta charset="utf-8">
-        <!--<script src="static/brython.js"></script>
-        <script src="static/brython_stdlib.js"></script>-->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
+        <script src="static/brython.js"></script>
+        <script src="static/brython_stdlib.js"></script>
+        <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>-->
     </head>
     <body onload="brython()">
         <div class="page-header">
@@ -34,13 +34,11 @@
 
         <div id="result"></div>
 
-        <!--<script type="text/python" src="static/bmi.py"></script>-->
         <script type="text/python">
             from browser import document
+            from browser import timer
             def func(event):
-                w = float(document["weight"].value)
-                h = float(document["height"].value)
-                document["result"].text = str(w/h/h)
+                document["result"].text = "Hello"
             document["execute"].bind("click", func)
         </script>
 
