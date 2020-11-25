@@ -110,6 +110,7 @@
         <script>
             $('#execute').on('click', function(){
                 $.ajax({
+                    type: 'POST',
                     url: "/api/",
                     processData: false,
                     contentType: false,
@@ -117,7 +118,7 @@
                         $('#result').html(data);
                     },
                     error: function(xhr, textStatus, errorThrown){
-                        alert('Error! ' + textStatus + ' ' + errorThrown);
+                        alert('Error! '+ xhr + textStatus + ' ' + errorThrown);
                     }
                 });
             });
