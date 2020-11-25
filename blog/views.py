@@ -4,8 +4,9 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
 from django.http import HttpResponse, Http404
-import webbrowser, requests, bs4, sys
+import sys
 sys.path.append('/usr/lib/python3.8/site-packages')
+import webbrowser, requests, bs4
 import numpy as np
 import random, math
 
