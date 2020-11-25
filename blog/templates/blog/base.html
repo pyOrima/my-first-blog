@@ -111,6 +111,8 @@
             $('#execute').on('click', function(){
                 $.ajax({
                     url: "/api/",
+                    processData: false,
+                    contentType: false,
                     success: function(data, textStatus){
                         $('#result').html(data);
                     },
