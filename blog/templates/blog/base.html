@@ -110,14 +110,14 @@
         <script>
             $('#execute').on('click', function(){
                 $.ajax({
-                    url: "/api/",
+                    url: "api/",
                     processData: false,
                     contentType: false,
                     success: function(data, textStatus){
                         $('#result').html(data);
                     },
                     error: function(xhr, textStatus, errorThrown){
-                        alert('Error! '+ xhr + textStatus + ' ' + errorThrown);
+                        alert('Error! '+ textStatus + ' ' + errorThrown);
                     }
                 });
             });
