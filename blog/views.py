@@ -4,9 +4,10 @@ from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
 from django.http import HttpResponse, Http404
+import webbrowser, requests, bs4, sys
+sys.path.append('/usr/lib/python3.8/site-packages')
 import numpy as np
 import random, math
-import webbrowser, requests, bs4, sys
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
