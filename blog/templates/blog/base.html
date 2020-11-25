@@ -11,6 +11,7 @@
         <script src="static/brython_stdlib.js"></script>-->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body onload="brython()">
         <div class="page-header">
@@ -27,21 +28,15 @@
                 </div>
             </div>
         </div>-->
-        <p>身長(メートル)
+        <!--<p>身長(メートル)
         <input type="text" id="height" />
         <p>体重(キログラム)
         <input type="text" id="weight" />
         <br><button id="execute">計算だ!</button>
 
-        <div id="result"></div>
+        <div id="result"></div>-->
 
-        <script type="text/python">
-            from browser import document
-            from browser import timer
-            def func(event):
-                document["result"].text = "Hello"
-            document["execute"].bind("click", func)
-        </script>
+
 
         <div align="center" class="container">
             <label>サンプルデータ：</label>
@@ -59,7 +54,7 @@
         </div>
         <br>
         <div align="right" class="container">
-            <table border="2">
+            <table border="0">
                 <thead>
                     <tr>
                         <font size="5">次の値</font>
@@ -73,27 +68,7 @@
             </table>
         </div>
         <script>pend=3+1;dend=10+1;</script>
-        <div class="container" align="center" id="original-data">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <td>データ番号</td>
-                        <script language="JavaScript">
-                            for (i=1; i<pend; i++) document.write('<td>パターン',i,'</td>');
-                        </script>
-                    </tr>
-                </thead>
-                <tbody>
-                    <script language="JavaScript">
-                        for (i=1; i<dend; i++) {
-                            document.write("<tr><td>",i,"</td>");
-                            for (j=1; j<pend; j++) document.write('<td><label><input type="checkbox" name="q1" value="d',j,'"></label></td>');
-                            document.write("</tr>");
-                        }
-                    </script>
-                </tbody>
-            </table>
-        </div>
+        <div class="container" align="center" id="original-data"></div>
         <script>
             document.getElementById("set-button").onclick = function(){
                 pend = document.getElementById("pattern").value + 1;
@@ -124,6 +99,26 @@
                 '</table>'+
                 '</div>';
             }
+        </script>
+
+        <!--<script type="text/python">
+            from browser import document
+            def func(event):
+                document["result"].text = 1
+            document["execute"].bind("click", func)
+        </script>-->
+        <script>
+            $('#execute').on('click', function(){
+                $.ajax({
+                    url: "/api/",
+                    success: function(data, textStatus){
+                        $('#result').html(data);
+                    },
+                    error: function(xhr, textStatus, errorThrown){
+                        alert('Error! ' + textStatus + ' ' + errorThrown);
+                    }
+                });
+            });
         </script>
     </body>
 </html>

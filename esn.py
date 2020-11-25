@@ -91,10 +91,10 @@ u_tr = np.append(u_tr, np.matrix(np.array(tr)), axis=1)
 te = get_data('http://park11.wakwak.com/~hkn/result2020.htm')
 u_te = np.matrix(np.array(te))
 
-N = 30
+N = 15
 sp, rho = 0.2, 0.9
 best = 0
-for t in range(1000):
+for t in range(100):
     d = u_tr[:,1:]
     u = u_tr[:,:-1]
     T = len(u.T)
