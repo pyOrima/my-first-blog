@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse, Http404
 import sys
 sys.path.append('/usr/lib/python3.6/site-packages')
+sys.path.append('/home/pyOrima/pyorima.pythonanywhere.com')
 import webbrowser, requests, bs4
 import numpy as np
 import random, math
