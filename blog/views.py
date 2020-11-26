@@ -60,12 +60,12 @@ def predict():
 
     def get_data(url):
         res = requests.get(url)
-        return url
         try:
             res.raise_for_status()
         except Exception as exc:
             print('ERROR:{}'.format(exc))
         soup = bs4.BeautifulSoup(res.content, "html.parser")
+        return str(soup)
         cnt = 0
         flg = 0
         rps = [[], [], []]
