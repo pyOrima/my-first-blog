@@ -150,6 +150,8 @@ def predict():
         u = u_tr[:,:-1]
         T = len(u.T)
 
+        return (str(T), 100)
+
         win = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(N, 3))
         win[win >= 1-sp] = 1
         win[win < sp] = -1
@@ -166,8 +168,6 @@ def predict():
 
         for i in range(T-1):
             x = np.append(x, f(np.dot(w, x[:,i]) + np.dot(win, u[:,i])), axis=1)
-
-        return (str(x.shape), 100)
 
         wout = np.dot(np.dot(d, x.T), np.linalg.pinv(np.dot(x, x.T)))
 
