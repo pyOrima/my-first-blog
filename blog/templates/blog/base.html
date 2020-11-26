@@ -49,6 +49,7 @@
             <input type="text" name="trial" value="10" id="trial">
             <button type="button" id="set-button">設定</button>
         </div>
+        {% csrf_token %}
         <div align="right" class="container">
             <button type="button" style="background-color: palegoldenrod;"><font size="5">予想</font></button>
         </div>
@@ -62,7 +63,6 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        {% csrf_token %}
                         <td><font size="10"><div id="result"></div></font></td>
                     </tr>
                 </tfoot>
