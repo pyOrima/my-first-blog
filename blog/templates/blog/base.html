@@ -141,6 +141,7 @@
             });
             $('#execute').on('click', function(){
                 $.ajax({
+                    type: 'GET',
                     url: "/api/",
                     processData: false,
                     contentType: false,
