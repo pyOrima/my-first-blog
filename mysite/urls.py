@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import sys
+sys.path.append('/home/pyOrima/pyorima.pythonanywhere.com')
 from blog import views
 
 urlpatterns = [
