@@ -10,13 +10,19 @@ import webbrowser, requests, bs4
 import numpy as np
 import random, math
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts':posts})
-
 def api(request):
     next_gcp, score = predict()
     return HttpResponse(next_gcp, status=200)
+
+def base(request):
+    return render(request, 'blog/base.html')
+
+def index(request):
+    return render(requests, 'index.html')
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts':posts})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -48,10 +54,6 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
-
-
-def base(request):
-    return render(request, 'blog/base.html')
 
 def predict():
 
