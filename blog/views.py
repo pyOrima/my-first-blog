@@ -91,8 +91,8 @@ def predict():
         return rps
 
     tr = get_data('http://park11.wakwak.com/~hkn/result1996.htm')
+    return (str(tr), 100)
     u_tr = np.matrix(np.array(tr))
-    return (str(u_tr.shape), 100)
     tr = get_data('http://park11.wakwak.com/~hkn/result1997.htm')
     u_tr = np.append(u_tr, np.matrix(np.array(tr)), axis=1)
     tr = get_data('http://park11.wakwak.com/~hkn/result1998.htm')
