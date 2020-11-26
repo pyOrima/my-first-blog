@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 import sys
-sys.path.append('/home/pyOrima/pyorima.pythonanywhere.com')
+sys.path.append('/home/pyOrima/pyorima.pythonanywhere.com/blog')
 from blog import views
 
 urlpatterns = [
