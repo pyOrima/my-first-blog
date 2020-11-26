@@ -142,6 +142,8 @@ def predict():
     te = get_data('http://park11.wakwak.com/~hkn/result2020.htm')
     u_te = np.matrix(np.array(te))
 
+    return (str(u_tr.shape), 100)
+
     N = 30
     sp, rho = 0.2, 0.9
     best = 0
@@ -149,8 +151,6 @@ def predict():
         d = u_tr[:,1:]
         u = u_tr[:,:-1]
         T = len(u.T)
-
-        return (str(u), 100)
 
         win = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(N, 3))
         win[win >= 1-sp] = 1
