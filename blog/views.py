@@ -150,7 +150,7 @@ def predict():
         u = u_tr[:,:-1]
         T = len(u.T)
 
-        return (str(T), 100)
+        return (str(u), 100)
 
         win = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(N, 3))
         win[win >= 1-sp] = 1
