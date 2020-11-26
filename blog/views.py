@@ -92,6 +92,7 @@ def predict():
 
     tr = get_data('http://park11.wakwak.com/~hkn/result1996.htm')
     u_tr = np.matrix(np.array(tr))
+    return (str(u_tr.shape), 100)
     tr = get_data('http://park11.wakwak.com/~hkn/result1997.htm')
     u_tr = np.append(u_tr, np.matrix(np.array(tr)), axis=1)
     tr = get_data('http://park11.wakwak.com/~hkn/result1998.htm')
@@ -141,8 +142,6 @@ def predict():
 
     te = get_data('http://park11.wakwak.com/~hkn/result2020.htm')
     u_te = np.matrix(np.array(te))
-
-    return (str(u_tr.shape), 100)
 
     N = 30
     sp, rho = 0.2, 0.9
