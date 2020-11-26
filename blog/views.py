@@ -54,8 +54,6 @@ def post_edit(request, pk):
 
 def predict():
 
-    return (1, 100)
-
     def f(x):
         ep = 0.5
         return 1/(1+np.exp(-x/ep))
@@ -165,6 +163,8 @@ def predict():
 
         y = np.matrix(np.array([random.random() for _ in range(3)]).reshape(3, 1))
         wout = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(3, N))
+
+        #return (1, 100)
 
 
         for i in range(T-1):
