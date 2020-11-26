@@ -142,7 +142,7 @@ def predict():
     te = get_data('http://park11.wakwak.com/~hkn/result2020.htm')
     u_te = np.matrix(np.array(te))
 
-    N = 15
+    N = 30
     sp, rho = 0.2, 0.9
     best = 0
     for t in range(1):
