@@ -54,6 +54,8 @@ def post_edit(request, pk):
 
 def predict():
 
+    return (1, 100)
+
     def f(x):
         ep = 0.5
         return 1/(1+np.exp(-x/ep))
