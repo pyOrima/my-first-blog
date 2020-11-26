@@ -142,7 +142,7 @@
             $('#execute').on('click', function(){
                 $.ajax({
                     type: 'GET',
-                    url: "/api/",
+                    url: "{% url 'blog:api' %}",
                     processData: false,
                     contentType: false,
                     success: function(data, textStatus){
