@@ -15,15 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import sys
-sys.path.append('https://www.pythonanywhere.com/user/pyOrima/files/home/pyOrima/pyorima.pythonanywhere.com/blog')
-from blog import views
-
-app_name = 'blog'
 
 urlpatterns = [
-    path('', views.base, name='base'),
-    path('api/', views.api, name="api"),
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
 ]
