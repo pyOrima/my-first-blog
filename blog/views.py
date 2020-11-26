@@ -60,7 +60,7 @@ def predict():
 
     def get_data(url):
         res = requests.get(url)
-        return rps
+        return res
         try:
             res.raise_for_status()
         except Exception as exc:
