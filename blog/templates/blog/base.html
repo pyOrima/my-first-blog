@@ -148,6 +148,37 @@
                     }
                 }
             });
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function(){
+                switch (xhr.readyState){
+                    case 0:
+                        console.log('uninitialized');
+                        break;
+                    case 1:
+                        console.log( 'loading...' );
+                        break;
+                    case 2:
+                        console.log( 'loaded.' );
+                        break;
+                    case 3:
+                        console.log( 'interactive... '+xhr.responseText.length+' bytes.' );
+                        break;
+                    case 4:
+                        if( xhr.status == 200 || xhr.status == 304 ) {
+                            var data = xhr.responseText;
+                            console.log( 'COMPLETE! :'+data );
+                        } else {
+                            console.log( 'Failed. HttpStatus: '+xhr.statusText );
+                        }
+                        break;
+                }
+            };
+
+            xhr.open('GET', "{% url 'blog:api' %}", false);
+            xhr.abort();
+
             $('#execute').on('click', function(){
                 $('.spinner').css('display', '');
                 $.ajax({
