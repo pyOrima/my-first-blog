@@ -12,6 +12,7 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/static/spinner.css">
     </head>
     <body onload="brython()">
         <div class="page-header">
@@ -101,7 +102,15 @@
                 '</div>';
             }
         </script>
-        
+        <div class="starter-template container">
+            <div class="spinner" style="display: none;">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
         <!--<script type="text/python">
             from browser import document
             def func(event):
@@ -140,15 +149,18 @@
                 }
             });
             $('#execute').on('click', function(){
+                $('.spinner').css('display', '');
                 $.ajax({
                     type: 'GET',
                     url: "{% url 'blog:api' %}",
                     processData: false,
                     contentType: false,
                     success: function(data, textStatus){
+                        $('.spinner').css('display', 'none');
                         $('#result').html(data);
                     },
                     error: function(xhr, textStatus, errorThrown){
+                        $('.spinner').css('display', 'none');
                         alert('Error! '+ textStatus + ' ' + errorThrown);
                     }
                 });
