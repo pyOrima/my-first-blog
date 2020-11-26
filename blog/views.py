@@ -164,11 +164,10 @@ def predict():
         y = np.matrix(np.array([random.random() for _ in range(3)]).reshape(3, 1))
         wout = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(3, N))
 
-        #return (1, 100)
-
-
         for i in range(T-1):
             x = np.append(x, f(np.dot(w, x[:,i]) + np.dot(win, u[:,i])), axis=1)
+
+        return (str(x.shape), 100)
 
         wout = np.dot(np.dot(d, x.T), np.linalg.pinv(np.dot(x, x.T)))
 
