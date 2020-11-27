@@ -1,0 +1,22 @@
+/* Spinner */
+.spinner:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 30%;
+    left: 90%;
+    height: 100px;
+    width: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    border-radius: 50%;
+    border: 5px solid lightgrey;
+    border-top-color: coral;
+    animation: spinner 0.5s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
