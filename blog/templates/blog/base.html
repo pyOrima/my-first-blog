@@ -56,7 +56,7 @@
         </div>
         {% csrf_token %}
         <div align="right" class="container">
-            <button type="button" style="background-color: palegoldenrod;"><font size="5">予想</font></button>
+            <button type="button" style="background-color: palegoldenrod;" id="pred"><font size="5">予想</font></button>
         </div>
         <br>
         <div align="right" class="container">
@@ -87,7 +87,7 @@
                     tmp_doc2 = tmp_doc2 + '<tr><td>' + i + '</td>';
                     tmp_doc = '';
                     for (j=1; j<pend/10; j++) {
-                        tmp_doc = tmp_doc + '<td><label><input type="checkbox" name="q"' + i +' vales="d"'+ j + '></label></td>';
+                        tmp_doc = tmp_doc + '<td><label><input type="checkbox" name="q' + i +'" id="'+ j + '"></label></td>';
                     }
                     tmp_doc2 = tmp_doc2 + tmp_doc + '</tr>';
                 }
@@ -192,6 +192,30 @@
                     }
                 });
             });
+            $('#pred').on('click', function(){
+                $('#result').html('<div class="spinner"></div>');
+                var od = [];
+                var cnt = 0;
+                $('input:checked').each(function(){
+                    od.push(this.id);
+                    cnt += 1;
+                })
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'blog:api2' %}",
+                    data: od,
+                    processData: false,
+                    contentType: false,
+                    success: function(data, textStatus){
+                        $('.spinner').css('display', 'none');
+                        $('#result').html(data);
+                    },
+                    error: function(xhr, textStatus, errorThrown){
+                        $('.spinner').css('display', 'none');
+                        alert('Error! '+ textStatus + ' ' + errorThrown);
+                    }
+                });
+            })
         </script>
     </body>
 </html>

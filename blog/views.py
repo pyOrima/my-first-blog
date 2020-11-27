@@ -14,6 +14,17 @@ def api(request):
     next_gcp, score = predict()
     return HttpResponse(str(next_gcp)+' ('+str(int(score))+'%)', status=200)
 
+def api2(request):
+    input_text = request.POST.getlist("name_input_text")
+    d = []
+    for p in request:
+        temp = p.decode()
+    for c in temp:
+        if c != ',':
+            d.append(int(c))
+    next_gcp, score = predict2(d)
+    return HttpResponse(str(next_gcp)+' ('+str(int(score))+'%)', status=200)
+
 def base(request):
     return render(request, 'blog/base.html')
 
@@ -51,6 +62,94 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+def predict2(dr):
+
+    def f(x):
+        ep = 0.5
+        return 1/(1+np.exp(-x/ep))
+
+    K = max(dr)
+    flg = 0
+    for k in dr:
+        tmp = np.empty(0)
+        for i in range(k-1):
+            tmp = np.append(tmp, 0)
+        tmp = np.append(tmp, 1)
+        for i in range(K-k):
+            tmp = np.append(tmp, 0)
+        if flg == 0:
+            u_tr = np.matrix(tmp).reshape(K,1)
+            flg = 1
+        else:
+            u_tr = np.append(u_tr, np.matrix(tmp).reshape(K,1), axis=1)
+
+    if len(dr) < 100: el = 100//len(dr) 
+    u_te = u_tr[:,1:]
+    for i in range(el):
+        u_te = np.append(u_te, u_tr, axis=1)
+    tmp = u_tr
+    u_tr = u_tr[:,:-1]
+    for i in range(el):
+        u_tr = np.append(u_tr, tmp, axis=1)
+ 
+    N = 50
+    sp, rho = 0.2, 0.9
+    best = -1
+    for t in range(200):
+        d = u_tr[:,1:]
+        u = u_tr[:,:-1]
+        T = len(u.T)
+
+        win = np.matrix(np.array([random.random() for _ in range(N*K)]).reshape(N, K))
+        win[win >= 1-sp] = 1
+        win[win < sp] = -1
+        win[(win < 1) & (win > -1)] = 0
+
+        x = np.matrix(np.array([random.random() for _ in range(N)]).reshape(N, 1))
+        w = np.matrix(np.array([1+(random.random()-1)/sp for _ in range(N**2)]).reshape(N, N))
+        w[w < 0] = 0
+        la, v = np.linalg.eig(w)
+        w = rho * w / abs(la[np.argmax(la)])
+
+        y = np.matrix(np.array([random.random() for _ in range(K)]).reshape(K, 1))
+        wout = np.matrix(np.array([random.random() for _ in range(N*K)]).reshape(K, N))
+
+        for i in range(T-1):
+            x = np.append(x, f(np.dot(w, x[:,i]) + np.dot(win, u[:,i])), axis=1)
+
+        wout = np.dot(np.dot(d, x.T), np.linalg.pinv(np.dot(x, x.T)))
+
+        d = u_te[:,1:]
+        u = u_te
+        T = len(u.T)
+
+        x = np.matrix(np.array([random.random() for _ in range(N)]).reshape(N, 1))
+        pre = []
+
+        for i in range(T):
+            x = np.append(x, f(np.dot(w, x[:,i]) + np.dot(win, u[:,i])), axis=1)
+            y = np.append(y, np.dot(wout, x[:,i+1]), axis=1)            
+            tmp_ind = 1
+            tmp_max = y[0, i+1]
+            for j in range(1, K):
+                if y[j, i+1] > tmp_max:
+                    tmp_max = y[j, i+1]
+                    tmp_ind = j+1
+            pre.append(tmp_ind)
+
+        ans = 0
+        for i in range(K):
+            ans += (i+1)*d[i,:]
+
+        cnt = 0
+        for i in range(T-1):
+            if ans[0,i] == pre[i]:
+                cnt += 1
+        if cnt > best:
+            pre_best = pre
+            best = cnt
+    return (pre_best[-1], best/T*100)
 
 def predict():
 
