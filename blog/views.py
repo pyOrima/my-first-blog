@@ -174,7 +174,7 @@ def predict():
     N = 15
     sp, rho = 0.2, 0.9
     best = 0
-    for t in range(10):
+    for t in range(100):
         d = u_tr[:,1:]
         u = u_tr[:,:-1]
         T = len(u.T)
