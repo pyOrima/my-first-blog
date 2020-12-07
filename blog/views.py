@@ -271,6 +271,8 @@ def predict():
     u_te = np.matrix(np.array(te))
     te = [[0],[1],[0]]
     u_te = np.append(u_te, np.matrix(np.array(te)), axis=1)
+    te = [[1],[0],[0]]
+    u_te = np.append(u_te, np.matrix(np.array(te)), axis=1)
 
     N = 15
     sp, rho = 0.2, 0.9
