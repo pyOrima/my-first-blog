@@ -154,7 +154,7 @@ def predict2(dr):
 def predict():
 
     def f(x):
-        ep = 0.5
+        ep = 0.3
         return 1/(1+np.exp(-x/ep))
 
     def get_data(url):
@@ -279,15 +279,14 @@ def predict():
     N = 15
     sp, rho = 0.2, 0.9
     best = 0
-    for t in range(10):
+    win = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(N, 3))
+    win[win >= 1-sp] = 1
+    win[win < sp] = -1
+    win[(win < 1) & (win > -1)] = 0
+    for t in range(200):
         d = u_tr[:,1:]
         u = u_tr[:,:-1]
         T = len(u.T)
-
-        win = np.matrix(np.array([random.random() for _ in range(N*3)]).reshape(N, 3))
-        win[win >= 1-sp] = 1
-        win[win < sp] = -1
-        win[(win < 1) & (win > -1)] = 0
 
         x = np.matrix(np.array([random.random() for _ in range(N)]).reshape(N, 1))
         w = np.matrix(np.array([1+(random.random()-1)/sp for _ in range(N**2)]).reshape(N, N))
